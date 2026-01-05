@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Filter, TrendingUp, Info, ShieldCheck } from 'lucide-react';
+import { Search, Filter, ShieldCheck } from 'lucide-react';
 
 interface Vault {
   id: string;
@@ -12,6 +12,7 @@ interface Vault {
   fees: string;
   ltv?: string;
   iconColor: string;
+  thumbnail: string;
 }
 
 const VAULTS: Vault[] = [
@@ -26,6 +27,7 @@ const VAULTS: Vault[] = [
     fees: '0.1%',
     ltv: '70%',
     iconColor: 'bg-purple-500',
+    thumbnail: 'https://cryptologos.cc/logos/aave-aave-logo.png?v=029'
   },
   {
     id: '2',
@@ -37,6 +39,7 @@ const VAULTS: Vault[] = [
     dailyChange: '+0.5%',
     fees: '0.04%',
     iconColor: 'bg-green-500',
+    thumbnail: 'https://cryptologos.cc/logos/curve-dao-token-crv-logo.png?v=029'
   },
   {
     id: '3',
@@ -48,6 +51,7 @@ const VAULTS: Vault[] = [
     dailyChange: '+0.1%',
     fees: '0.25%',
     iconColor: 'bg-blue-600',
+    thumbnail: 'https://assets.coingecko.com/coins/images/28766/standard/Ondo_icon.png'
   },
   {
     id: '4',
@@ -59,6 +63,7 @@ const VAULTS: Vault[] = [
     dailyChange: '+0.1%',
     fees: '0.02%',
     iconColor: 'bg-orange-500',
+    thumbnail: 'https://cryptologos.cc/logos/paxos-gold-paxg-logo.png?v=029'
   },
 ];
 
@@ -107,7 +112,8 @@ export default function VaultsPage() {
               <div className="flex justify-between items-start mb-6">
                 <div className="flex gap-3">
                   <div className={`w-10 h-10 rounded-full ${vault.iconColor} flex items-center justify-center shadow-lg shadow-black/50`}>
-                    <ShieldCheck className="w-6 h-6 text-white" />
+                    {/*<ShieldCheck className="w-6 h-6 text-white" />*/}
+                  <img src={vault.thumbnail} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-zinc-100">{vault.name}</h3>

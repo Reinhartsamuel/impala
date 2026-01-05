@@ -1,8 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, TrendingUp, Zap } from 'lucide-react';
-import { StepComponentProps } from './types';
-import { STEP_CONFIG } from './types';
+import { StepComponentProps, STEP_CONFIG } from './types';
 
 const ICON_MAP = {
   'Protect Capital': Shield,

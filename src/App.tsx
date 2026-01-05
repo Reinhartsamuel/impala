@@ -5,6 +5,7 @@ import VaultsPage from './pages/VaultsPage';
 import DashboardPage from './pages/DashboardPage';
 import WalletPage from './pages/WalletPage';
 import SettingsPage from './pages/SettingsPage';
+import RiskOnboardingDemo from './pages/RiskOnboardingDemo';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="wallet" element={<WalletPage />} />
           <Route path="settings" element={<SettingsPage />} />
+          <Route path="risk-onboarding" element={<RiskOnboardingDemo />} />
           {/* Add more routes here as needed */}
         </Route>
       </Routes>

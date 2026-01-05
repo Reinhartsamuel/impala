@@ -1,12 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { 
-  RiskOnboardingProps, 
-  RiskOnboardingData, 
-  OnboardingStep, 
+import {
+  RiskOnboardingProps,
+  RiskOnboardingData,
+  OnboardingStep,
   calculateRiskProfile,
-  STEP_CONFIG 
+  STEP_CONFIG
 } from './types';
 import { ProgressBar } from './ProgressBar';
 import { GoalStep } from './GoalStep';
@@ -105,7 +105,7 @@ export const RiskOnboarding: React.FC<RiskOnboardingProps> = ({
             <X className="w-4 h-4" />
             <span className="text-sm font-medium">Skip</span>
           </button>
-          
+
           <div className="flex-1 max-w-xs mx-4">
             <ProgressBar progress={progress} />
           </div>
@@ -141,7 +141,7 @@ export const RiskOnboarding: React.FC<RiskOnboardingProps> = ({
                 <span className="text-sm font-medium">Back</span>
               </button>
             ) : (
-              <div /> {/* Empty div for spacing */}
+            <></>
             )}
 
             {currentStep !== 'result' && formData[currentStep] && (

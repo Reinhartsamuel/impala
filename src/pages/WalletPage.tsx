@@ -1,5 +1,5 @@
 import React from 'react';
-import { Wallet, Send, Receive, History, Copy, QrCode, ExternalLink, ChevronRight } from 'lucide-react';
+import { Wallet, Send, ArrowDownToLine, History, Copy, QrCode, ExternalLink, ChevronRight } from 'lucide-react';
 
 const WalletPage: React.FC = () => {
   const tokens = [
@@ -132,7 +132,7 @@ const WalletPage: React.FC = () => {
         <button className="group bg-black border border-zinc-800 hover:border-emerald-500/50 rounded-xl p-4 transition-all active:scale-[0.98]">
           <div className="flex flex-col items-center gap-2">
             <div className="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center">
-              <Receive className="w-6 h-6 text-emerald-400" />
+              <ArrowDownToLine className="w-6 h-6 text-emerald-400" />
             </div>
             <span className="text-sm font-medium text-zinc-200">Receive</span>
           </div>
@@ -260,7 +260,7 @@ const WalletPage: React.FC = () => {
                     {tx.type === 'sent' ? (
                       <Send className="w-5 h-5 text-rose-400" />
                     ) : tx.type === 'received' ? (
-                      <Receive className="w-5 h-5 text-emerald-400" />
+                      <ArrowDownToLine className="w-5 h-5 text-emerald-400" />
                     ) : (
                       <History className="w-5 h-5 text-blue-400" />
                     )}
