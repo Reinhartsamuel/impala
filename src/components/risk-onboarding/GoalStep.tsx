@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Shield, TrendingUp, Zap } from 'lucide-react';
-import { StepComponentProps, STEP_CONFIG } from './types';
+import type { StepComponentProps } from './types';
+import { STEP_CONFIG } from './types';
 
 const ICON_MAP = {
   'Protect Capital': Shield,
@@ -24,9 +25,6 @@ const BORDER_COLOR_MAP = {
 export const GoalStep: React.FC<StepComponentProps> = ({
   data,
   onUpdate,
-  onNext,
-  onBack,
-  onSkip,
 }) => {
   const { title, description, options } = STEP_CONFIG.goal;
   const selectedValue = data.goal;
@@ -78,12 +76,7 @@ export const GoalStep: React.FC<StepComponentProps> = ({
                 {/* Icon */}
                 <div className={`w-12 h-12 rounded-xl bg-zinc-900/60 flex items-center justify-center ${
                   isSelected ? 'ring-2 ring-offset-2 ring-offset-black' : ''
-                }`} style={{
-                  ringColor: isSelected ? 
-                    option.value === 'Protect Capital' ? '#3b82f6' :
-                    option.value === 'Steady Growth' ? '#10b981' :
-                    '#8b5cf6' : 'transparent'
-                }}>
+                }`}>
                   <Icon className={`w-6 h-6 ${COLOR_MAP[option.value]}`} />
                 </div>
 

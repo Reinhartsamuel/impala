@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Book, Cpu, Zap } from 'lucide-react';
-import { StepComponentProps } from './types';
+import type { StepComponentProps } from './types';
 import { STEP_CONFIG } from './types';
 
 const ICON_MAP = {
@@ -31,9 +31,7 @@ const LEVEL_MAP = {
 export const ExperienceStep: React.FC<StepComponentProps> = ({
   data,
   onUpdate,
-  onNext,
-  onBack,
-  onSkip,
+
 }) => {
   const { title, description, options } = STEP_CONFIG.experience;
   const selectedValue = data.experience;
@@ -50,11 +48,11 @@ export const ExperienceStep: React.FC<StepComponentProps> = ({
           <div className="w-2 h-2 rounded-full bg-blue-500" />
           <span className="text-sm text-blue-400 font-medium">Step 3 of 3</span>
         </div>
-        
+
         <h1 className="text-2xl font-bold tracking-tight text-zinc-100">
           {title}
         </h1>
-        
+
         <p className="text-zinc-500 text-sm leading-relaxed">
           {description}
         </p>
@@ -71,18 +69,18 @@ export const ExperienceStep: React.FC<StepComponentProps> = ({
             <Cpu className="w-6 h-6 text-emerald-400" />
           </div>
         </div>
-        
+
         <div className="space-y-4">
           <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
             <div className="h-full w-full bg-gradient-to-r from-blue-500 via-emerald-500 to-purple-500" />
           </div>
-          
+
           <div className="flex justify-between">
-            {options.map((option, index) => (
+            {options.map((option) => (
               <div key={option.value} className="flex flex-col items-center">
                 <div className={`w-3 h-3 rounded-full mb-2 ${
-                  selectedValue === option.value 
-                    ? COLOR_MAP[option.value] 
+                  selectedValue === option.value
+                    ? COLOR_MAP[option.value]
                     : 'bg-zinc-700'
                 }`} />
                 <span className="text-xs text-zinc-500">{option.label}</span>
@@ -98,14 +96,14 @@ export const ExperienceStep: React.FC<StepComponentProps> = ({
           const Icon = ICON_MAP[option.value];
           const isSelected = selectedValue === option.value;
           const level = LEVEL_MAP[option.value];
-          
+
           return (
             <motion.button
               key={option.value}
               onClick={() => handleSelect(option.value)}
               className={`w-full text-left bg-zinc-900/40 border rounded-2xl p-5 transition-all duration-300 ${
-                isSelected 
-                  ? `${BORDER_COLOR_MAP[option.value]} shadow-lg shadow-blue-900/10` 
+                isSelected
+                  ? `${BORDER_COLOR_MAP[option.value]} shadow-lg shadow-blue-900/10`
                   : 'border-zinc-800 hover:border-zinc-700'
               }`}
               whileHover={{ scale: 1.01 }}
@@ -118,12 +116,7 @@ export const ExperienceStep: React.FC<StepComponentProps> = ({
                 {/* Icon */}
                 <div className={`w-12 h-12 rounded-xl bg-zinc-900/60 flex items-center justify-center ${
                   isSelected ? 'ring-2 ring-offset-2 ring-offset-black' : ''
-                }`} style={{
-                  ringColor: isSelected ? 
-                    option.value === '0' ? '#3b82f6' :
-                    option.value === '1-5' ? '#10b981' :
-                    '#8b5cf6' : 'transparent'
-                }}>
+                }`}>
                   <Icon className={`w-6 h-6 ${COLOR_MAP[option.value]}`} />
                 </div>
 
@@ -140,7 +133,7 @@ export const ExperienceStep: React.FC<StepComponentProps> = ({
                         {level} Level
                       </span>
                     </div>
-                    
+
                     {isSelected && (
                       <motion.div
                         initial={{ scale: 0 }}
@@ -151,7 +144,7 @@ export const ExperienceStep: React.FC<StepComponentProps> = ({
                       </motion.div>
                     )}
                   </div>
-                  
+
                   <p className="text-zinc-500 text-sm mt-2 leading-relaxed">
                     {option.description}
                   </p>
@@ -168,7 +161,7 @@ export const ExperienceStep: React.FC<StepComponentProps> = ({
                         const protocols = option.value === '0' ? ['AAVE'] :
                                          option.value === '1-5' ? ['AAVE', 'Compound', 'Curve'] :
                                          ['AAVE', 'Compound', 'Curve', 'Maker', 'Uniswap', 'Yearn'];
-                        
+
                         return protocols.map((protocol, idx) => (
                           <div
                             key={idx}

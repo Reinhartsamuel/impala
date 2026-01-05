@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, TrendingUp, Zap, CheckCircle, ArrowRight, Sparkles } from 'lucide-react';
-import { StepComponentProps, calculateRiskProfile, RiskProfile } from './types';
+import type { StepComponentProps, RiskProfile } from './types';
+import { calculateRiskProfile } from './types';
 
 interface ResultStepProps extends StepComponentProps {
   onComplete: () => void;
@@ -68,14 +69,14 @@ export const ResultStep: React.FC<ResultStepProps> = ({
     const timer = setTimeout(() => {
       const profile = calculateRiskProfile(data);
       setRiskProfile(profile);
-      
+
       // Calculate score for visualization
-      const calculatedScore = 
+      const calculatedScore =
         (data.goal === 'Protect Capital' ? 1 : data.goal === 'Steady Growth' ? 2 : 3) +
         (data.tolerance === 'Panic sell' ? 1 : data.tolerance === 'Do nothing' ? 2 : 3) +
         (data.experience === '0' ? 1 : data.experience === '1-5' ? 2 : 3);
       setScore(calculatedScore);
-      
+
       setIsCalculating(false);
     }, 800);
 
@@ -97,11 +98,11 @@ export const ResultStep: React.FC<ResultStepProps> = ({
         >
           <Sparkles className="w-8 h-8 text-white" />
         </motion.div>
-        
+
         <h1 className="text-2xl font-bold tracking-tight text-zinc-100">
           Your Risk Profile
         </h1>
-        
+
         <p className="text-zinc-500 text-sm">
           Based on your responses, we've calculated your optimal risk level
         </p>
@@ -143,7 +144,7 @@ export const ResultStep: React.FC<ResultStepProps> = ({
                   <p className="text-sm text-zinc-500">Risk Level</p>
                 </div>
               </div>
-              
+
               <div className="text-right">
                 <div className="text-2xl font-bold text-zinc-100">Score: {score}/9</div>
                 <div className="text-xs text-zinc-500">Risk Assessment</div>
@@ -157,7 +158,7 @@ export const ResultStep: React.FC<ResultStepProps> = ({
                 <span>Moderate</span>
                 <span>Degen</span>
               </div>
-              
+
               <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}
@@ -166,7 +167,7 @@ export const ResultStep: React.FC<ResultStepProps> = ({
                   className={`h-full bg-gradient-to-r ${config.gradient} rounded-full`}
                 />
               </div>
-              
+
               <div className="flex justify-between mt-2">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((point) => (
                   <div
@@ -187,7 +188,7 @@ export const ResultStep: React.FC<ResultStepProps> = ({
           {/* Recommendations */}
           <div className="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-6">
             <h3 className="text-lg font-semibold text-zinc-100 mb-4">Recommended Strategies</h3>
-            
+
             <div className="space-y-3">
               {config.recommendations.map((rec, index) => (
                 <motion.div
@@ -207,7 +208,7 @@ export const ResultStep: React.FC<ResultStepProps> = ({
           {/* Vault Types */}
           <div className="bg-zinc-900/40 border border-zinc-800 rounded-2xl p-6">
             <h3 className="text-lg font-semibold text-zinc-100 mb-4">Suggested Vault Types</h3>
-            
+
             <div className="flex flex-wrap gap-2">
               {config.vaultTypes.map((type, index) => (
                 <motion.span
@@ -259,7 +260,7 @@ export const ResultStep: React.FC<ResultStepProps> = ({
             <span className="text-sm font-medium">Complete Onboarding</span>
             <ArrowRight className="w-4 h-4" />
           </button>
-          
+
           <p className="text-xs text-zinc-600 text-center mt-3">
             You can update your risk profile anytime in Settings
           </p>

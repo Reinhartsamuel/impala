@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { RiskOnboarding, RiskProfile, RiskOnboardingData } from '../components/risk-onboarding';
+import { RiskOnboarding } from '../components/risk-onboarding';
+import type { RiskProfile, RiskOnboardingData } from '../components/risk-onboarding';
 import { ArrowLeft, Home, CheckCircle, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 

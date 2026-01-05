@@ -1,13 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import {
+import type {
   RiskOnboardingProps,
   RiskOnboardingData,
   OnboardingStep,
-  calculateRiskProfile,
-  STEP_CONFIG
 } from './types';
+import { calculateRiskProfile } from './types';
 import { ProgressBar } from './ProgressBar';
 import { GoalStep } from './GoalStep';
 import { ToleranceStep } from './ToleranceStep';

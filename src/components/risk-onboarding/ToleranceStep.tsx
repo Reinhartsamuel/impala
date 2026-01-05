@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { AlertTriangle, MinusCircle, PlusCircle } from 'lucide-react';
-import { StepComponentProps } from './types';
+import type { StepComponentProps } from './types';
 import { STEP_CONFIG } from './types';
 
 const ICON_MAP = {
@@ -25,9 +25,7 @@ const BORDER_COLOR_MAP = {
 export const ToleranceStep: React.FC<StepComponentProps> = ({
   data,
   onUpdate,
-  onNext,
-  onBack,
-  onSkip,
+
 }) => {
   const { title, description, options } = STEP_CONFIG.tolerance;
   const selectedValue = data.tolerance;
@@ -44,11 +42,11 @@ export const ToleranceStep: React.FC<StepComponentProps> = ({
           <div className="w-2 h-2 rounded-full bg-blue-500" />
           <span className="text-sm text-blue-400 font-medium">Step 2 of 3</span>
         </div>
-        
+
         <h1 className="text-2xl font-bold tracking-tight text-zinc-100">
           {title}
         </h1>
-        
+
         <p className="text-zinc-500 text-sm leading-relaxed">
           {description}
         </p>
@@ -65,11 +63,11 @@ export const ToleranceStep: React.FC<StepComponentProps> = ({
             <AlertTriangle className="w-6 h-6 text-amber-400" />
           </div>
         </div>
-        
+
         <div className="h-2 bg-zinc-800 rounded-full overflow-hidden mb-2">
           <div className="h-full w-full bg-gradient-to-r from-emerald-500 via-amber-500 to-rose-500" />
         </div>
-        
+
         <div className="flex justify-between text-xs text-zinc-500">
           <span>Start of Week</span>
           <span className="text-rose-400">-20% Drop</span>
@@ -82,14 +80,14 @@ export const ToleranceStep: React.FC<StepComponentProps> = ({
         {options.map((option, index) => {
           const Icon = ICON_MAP[option.value];
           const isSelected = selectedValue === option.value;
-          
+
           return (
             <motion.button
               key={option.value}
               onClick={() => handleSelect(option.value)}
               className={`w-full text-left bg-zinc-900/40 border rounded-2xl p-5 transition-all duration-300 ${
-                isSelected 
-                  ? `${BORDER_COLOR_MAP[option.value]} shadow-lg shadow-blue-900/10` 
+                isSelected
+                  ? `${BORDER_COLOR_MAP[option.value]} shadow-lg shadow-blue-900/10`
                   : 'border-zinc-800 hover:border-zinc-700'
               }`}
               whileHover={{ scale: 1.01 }}
@@ -102,12 +100,7 @@ export const ToleranceStep: React.FC<StepComponentProps> = ({
                 {/* Icon */}
                 <div className={`w-12 h-12 rounded-xl bg-zinc-900/60 flex items-center justify-center ${
                   isSelected ? 'ring-2 ring-offset-2 ring-offset-black' : ''
-                }`} style={{
-                  ringColor: isSelected ? 
-                    option.value === 'Panic sell' ? '#fb7185' :
-                    option.value === 'Do nothing' ? '#fbbf24' :
-                    '#34d399' : 'transparent'
-                }}>
+                }`}>
                   <Icon className={`w-6 h-6 ${COLOR_MAP[option.value]}`} />
                 </div>
 
@@ -119,7 +112,7 @@ export const ToleranceStep: React.FC<StepComponentProps> = ({
                     }`}>
                       {option.label}
                     </h3>
-                    
+
                     {isSelected && (
                       <motion.div
                         initial={{ scale: 0 }}
@@ -130,7 +123,7 @@ export const ToleranceStep: React.FC<StepComponentProps> = ({
                       </motion.div>
                     )}
                   </div>
-                  
+
                   <p className="text-zinc-500 text-sm mt-2 leading-relaxed">
                     {option.description}
                   </p>
@@ -147,7 +140,7 @@ export const ToleranceStep: React.FC<StepComponentProps> = ({
                         <div
                           key={level}
                           className={`w-2 h-2 rounded-full ${
-                            level <= (option.value === 'Panic sell' ? 1 : 
+                            level <= (option.value === 'Panic sell' ? 1 :
                                      option.value === 'Do nothing' ? 2 : 3)
                               ? COLOR_MAP[option.value]
                               : 'bg-zinc-800'
@@ -156,7 +149,7 @@ export const ToleranceStep: React.FC<StepComponentProps> = ({
                       ))}
                     </div>
                     <span className={`text-xs font-medium ${COLOR_MAP[option.value]}`}>
-                      {option.value === 'Panic sell' ? 'Low' : 
+                      {option.value === 'Panic sell' ? 'Low' :
                        option.value === 'Do nothing' ? 'Medium' : 'High'}
                     </span>
                   </div>
