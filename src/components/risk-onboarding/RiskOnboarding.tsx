@@ -89,7 +89,7 @@ export const RiskOnboarding: React.FC<RiskOnboardingProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-black text-white font-sans relative overflow-auto">
       {/* Subtle OLED illumination effects */}
       <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] bg-indigo-900/10 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] bg-emerald-900/10 rounded-full blur-[120px]" />
@@ -143,10 +143,21 @@ export const RiskOnboarding: React.FC<RiskOnboardingProps> = ({
             <></>
             )}
 
-            {currentStep !== 'result' && formData[currentStep] && (
+            {currentStep !== 'result' && (
               <button
                 onClick={handleNext}
-                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all active:scale-[0.98] shadow-lg shadow-blue-900/20"
+                className={`flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-xl transition-all active:scale-[0.98] shadow-lg shadow-blue-900/20 ${
+                  (currentStep === 'goal' && !formData.goal) ||
+                  (currentStep === 'tolerance' && !formData.tolerance) ||
+                  (currentStep === 'experience' && !formData.experience)
+                    ? 'opacity-50 cursor-not-allowed'
+                    : ''
+                }`}
+                disabled={
+                  (currentStep === 'goal' && !formData.goal) ||
+                  (currentStep === 'tolerance' && !formData.tolerance) ||
+                  (currentStep === 'experience' && !formData.experience)
+                }
               >
                 <span className="text-sm font-medium">Continue</span>
                 <ChevronRight className="w-4 h-4" />

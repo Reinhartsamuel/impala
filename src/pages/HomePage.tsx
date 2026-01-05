@@ -1,7 +1,9 @@
 import React from 'react';
 import { TrendingUp, Shield, Zap, Globe, ArrowUpRight, Sparkles } from 'lucide-react';
+import { RiskOnboarding } from '../components/risk-onboarding';
 
 const HomePage: React.FC = () => {
+
   const features = [
     {
       icon: Shield,
@@ -65,14 +67,14 @@ const HomePage: React.FC = () => {
           <Sparkles className="w-5 h-5 text-blue-400" />
           <span className="text-sm text-blue-400 font-medium">Welcome back, John</span>
         </div>
-        
+
         <h1 className="text-3xl font-bold tracking-tight">
           Your DeFi
           <span className="block bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
             Command Center
           </span>
         </h1>
-        
+
         <p className="text-zinc-400">
           Manage, track, and optimize your decentralized finance portfolio in one place.
         </p>
@@ -90,7 +92,7 @@ const HomePage: React.FC = () => {
             <span className="text-sm font-medium">+12.4%</span>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-3 gap-4 pt-4 border-t border-zinc-900">
           <div>
             <p className="text-[10px] text-zinc-500 uppercase tracking-wider">24h Change</p>
@@ -110,7 +112,7 @@ const HomePage: React.FC = () => {
       {/* Features Grid */}
       <div className="space-y-4">
         <h2 className="text-lg font-semibold text-zinc-100">Why Choose Impala</h2>
-        
+
         <div className="grid grid-cols-2 gap-3">
           {features.map((feature, index) => {
             const Icon = feature.icon;
@@ -142,7 +144,7 @@ const HomePage: React.FC = () => {
             View All →
           </button>
         </div>
-        
+
         <div className="space-y-3">
           {trendingVaults.map((vault, index) => (
             <div
@@ -164,7 +166,7 @@ const HomePage: React.FC = () => {
                   <p className="text-lg font-bold text-emerald-400">{vault.apy}</p>
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-2 gap-4 mt-4 pt-4 border-t border-zinc-900">
                 <div>
                   <p className="text-[10px] text-zinc-500 uppercase">TVL</p>
@@ -183,7 +185,7 @@ const HomePage: React.FC = () => {
       {/* Quick Actions */}
       <div className="space-y-4">
         <h2 className="text-lg font-semibold text-zinc-100">Quick Actions</h2>
-        
+
         <div className="grid grid-cols-2 gap-3">
           <button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium py-3 px-4 rounded-xl transition-all active:scale-[0.98]">
             Deposit Funds
