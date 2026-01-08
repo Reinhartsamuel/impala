@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
-import { Home, TrendingUp, BarChart3, Settings, Wallet } from 'lucide-react';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Home, TrendingUp, BarChart3, Settings, Wallet, LogOut, User } from 'lucide-react';
+import { usePrivy } from '@privy-io/react-auth';
 import { RiskOnboarding } from './risk-onboarding';
 
 const Layout: React.FC = () => {
@@ -22,18 +23,21 @@ const Layout: React.FC = () => {
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-900/10 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-900/10 rounded-full blur-[120px]" />
 
-      <div className="max-w-md mx-auto px-4 py-8 relative z-10 min-h-screen">
+      <div className="max-w-xl mx-auto px-4 py-8 relative z-10 min-h-screen">
         {/* Top Navigation */}
         <header className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Impala</h1>
             <p className="text-zinc-500 text-sm">DeFi Management Suite</p>
-            <button onClick={() => setShowOnboarding(true)}>Start Risk Assessment</button>
+            <button 
+              onClick={() => setShowOnboarding(true)}
+              className="mt-2 px-4 py-1.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-medium rounded-lg transition-all active:scale-[0.98] shadow-lg shadow-blue-900/20"
+            >
+              Start Risk Assessment
+            </button>
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-              <span className="text-xs font-bold">JD</span>
-            </div>
+            <UserProfile />
           </div>
         </header>
 
@@ -82,6 +86,52 @@ const Layout: React.FC = () => {
           </nav>
         )}
       </div>
+    </div>
+  );
+};
+
+const UserProfile: React.FC = () => {
+  const { authenticated, user, logout } = usePrivy();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
+
+  if (!authenticated || !user) {
+    return (
+      <button
+        onClick={() => navigate('/login')}
+        className="px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-medium rounded-lg transition-all active:scale-[0.98]"
+      >
+        Sign In
+      </button>
+    );
+  }
+
+  // Get user email or wallet address
+  const userIdentifier = user.email?.address || 
+                        (user.wallet?.address ? `${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)}` : 'User');
+
+  return (
+    <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 px-3 py-2 bg-gray-900 border border-gray-800 rounded-lg">
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+          <User className="w-4 h-4" />
+        </div>
+        <div className="text-sm">
+          <div className="font-medium">{userIdentifier}</div>
+          <div className="text-xs text-gray-400">Connected</div>
+        </div>
+      </div>
+      <button
+        onClick={handleLogout}
+        className="p-2 bg-gray-900 border border-gray-800 hover:bg-gray-800 text-gray-400 hover:text-white rounded-lg transition-all"
+        title="Logout"
+      >
+        <LogOut className="w-4 h-4" />
+      </button>
     </div>
   );
 };

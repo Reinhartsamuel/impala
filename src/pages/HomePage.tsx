@@ -1,8 +1,33 @@
 import React from 'react';
-import { TrendingUp, Shield, Zap, Globe, ArrowUpRight, Sparkles } from 'lucide-react';
+import { TrendingUp, Shield, Zap, Globe, ArrowUpRight, Sparkles, Loader } from 'lucide-react';
+import { usePrivy } from '@privy-io/react-auth';
 import { RiskOnboarding } from '../components/risk-onboarding';
 
 const HomePage: React.FC = () => {
+  const { user, ready } = usePrivy();
+
+  if (!ready) {
+    return (
+      <div className="flex items-center justify-center min-h-[60vh]">
+        <div className="text-center space-y-4">
+          <Loader className="w-8 h-8 text-blue-400 animate-spin mx-auto" />
+          <p className="text-zinc-400">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="text-center space-y-4 py-8">
+        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center mx-auto">
+          <Sparkles className="w-8 h-8" />
+        </div>
+        <h2 className="text-xl font-bold">Welcome to Impala</h2>
+        <p className="text-zinc-400">Please sign in to continue</p>
+      </div>
+    );
+  }
 
   const features = [
     {
@@ -65,7 +90,9 @@ const HomePage: React.FC = () => {
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <Sparkles className="w-5 h-5 text-blue-400" />
-          <span className="text-sm text-blue-400 font-medium">Welcome back, John</span>
+          <span className="text-sm text-blue-400 font-medium">
+            Welcome back, {user.email?.address || (user.wallet?.address ? `${user.wallet.address.slice(0, 6)}...${user.wallet.address.slice(-4)}` : 'User')}
+          </span>
         </div>
 
         <h1 className="text-3xl font-bold tracking-tight">
